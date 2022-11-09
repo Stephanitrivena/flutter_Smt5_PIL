@@ -1,7 +1,5 @@
 import 'package:get/get.dart';
 
-import '../modules/about/bindings/about_binding.dart';
-import '../modules/about/views/about_view.dart';
 import '../modules/friends/bindings/friends_binding.dart';
 import '../modules/friends/views/friends_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -30,11 +28,6 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
-    ),
-    GetPage(
-      name: _Paths.ABOUT,
-      page: () => const AboutView(),
-      binding: AboutBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
