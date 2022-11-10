@@ -11,7 +11,7 @@ class Sidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      elevation: 5,
+      elevation: 0,
       child: Container(
         height: Get.height,
         color: Colors.blue[100],
@@ -48,8 +48,8 @@ class Sidebar extends StatelessWidget {
                               : const BoxDecoration(),
                           child: Icon(
                             Get.currentRoute == '/home'
-                                ? Icons.desktop_mac
-                                : Icons.desktop_mac_outlined,
+                                ? Icons.desktop_windows
+                                : Icons.desktop_windows_outlined,
                             color: Colors.grey,
                             size: 30,
                           ),
