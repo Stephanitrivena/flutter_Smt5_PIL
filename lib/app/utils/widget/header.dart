@@ -1,6 +1,7 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pertama/app/routes/app_pages.dart';
+import 'package:flutter_pertama/app/utils/style/AppColors.dart';
 import 'package:get/get.dart';
 
 class header extends StatelessWidget {
@@ -21,11 +22,11 @@ class header extends StatelessWidget {
             children: const [
               Text(
                 'Task Management',
-                style: TextStyle(fontSize: 25, color: Colors.grey),
+                style: TextStyle(fontSize: 25, color: AppColors.primaryText),
               ),
               Text(
                 'Manage task make easy with friends',
-                style: TextStyle(fontSize: 15, color: Colors.grey),
+                style: TextStyle(fontSize: 15, color: AppColors.primaryText),
               ),
             ],
           ),
@@ -58,7 +59,7 @@ class header extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          Icon(AntIcons.bellFilled, color: Colors.grey),
+          Icon(AntIcons.bellFilled, color: AppColors.primaryText, size: 30),
           SizedBox(
             width: 20,
           ),
@@ -79,14 +80,15 @@ class header extends StatelessWidget {
               children: const [
                 Text(
                   'Sign Out',
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: AppColors.primaryText, fontSize: 18),
                 ),
                 SizedBox(
                   width: 5,
                 ),
                 Icon(
                   AntIcons.logoutOutlined,
-                  color: Colors.grey,
+                  color: AppColors.primaryText,
+                  size: 30,
                 ),
               ],
             ),
