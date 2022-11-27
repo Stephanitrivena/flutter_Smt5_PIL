@@ -4,7 +4,11 @@ import 'package:flutter_pertama/app/utils/style/AppColors.dart';
 import 'package:flutter_pertama/app/utils/widget/header.dart';
 import 'package:flutter_pertama/app/utils/widget/sidebar.dart';
 import 'package:get/get.dart';
+import 'package:flutter_pertama/app/utils/widget/Upcomingtask.dart';
 import '../controllers/home_controller.dart';
+import 'dart:js';
+
+import 'package:flutter_pertama/app/utils/widget/myfriends.dart';
 
 class HomeView extends GetView<HomeController> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
@@ -12,10 +16,11 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _drawerKey,
-        drawer: const Sidebar(),
-        backgroundColor: AppColors.primaryBg,
-        body: Row(
+      key: _drawerKey,
+      drawer: const Sidebar(),
+      backgroundColor: AppColors.primaryBg,
+      body: SafeArea(
+        child: Row(
           children: [
             !context.isPhone
                 ? const Expanded(
@@ -37,18 +42,16 @@ class HomeView extends GetView<HomeController> {
                                 onPressed: () {
                                   _drawerKey.currentState!.openDrawer();
                                 },
-                                icon: const Icon(
-                                  Icons.menu,
-                                  color: AppColors.primaryText,
-                                ),
+                                icon: const Icon(Icons.menu,
+                                    color: AppColors.primaryText),
                               ),
                               const SizedBox(
                                 width: 15,
                               ),
                               Column(
-                                //mainAxisAlignment: MainAxisAlignment.start,
+                                // mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
                                     'Task Management',
                                     style: TextStyle(
@@ -56,19 +59,16 @@ class HomeView extends GetView<HomeController> {
                                         color: AppColors.primaryText),
                                   ),
                                   Text(
-                                    'Manage task make easy with friends',
+                                    'Manage task made easy with friends',
                                     style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: 15,
                                         color: AppColors.primaryText),
                                   ),
                                 ],
                               ),
                               const Spacer(),
-                              const Icon(
-                                AntIcons.bellFilled,
-                                color: AppColors.primaryText,
-                                size: 30,
-                              ),
+                              const Icon(AntIcons.notificationFilled,
+                                  color: AppColors.primaryText, size: 30),
                               const SizedBox(
                                 width: 15,
                               ),
@@ -87,7 +87,9 @@ class HomeView extends GetView<HomeController> {
                   //content / isi page / screen
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.all(50),
+                      padding: !context.isPhone
+                          ? const EdgeInsets.all(50)
+                          : const EdgeInsets.all(20),
                       margin: !context.isPhone
                           ? const EdgeInsets.all(10)
                           : const EdgeInsets.all(0),
@@ -95,100 +97,408 @@ class HomeView extends GetView<HomeController> {
                         color: Colors.white,
                         borderRadius: !context.isPhone
                             ? BorderRadius.circular(50)
-                            : BorderRadius.circular(30),
+                            : BorderRadius.circular(20),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'My Task',
-                            style: TextStyle(
-                                color: AppColors.primaryText, fontSize: 30),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
                           SizedBox(
-                            height: 200,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
+                            // height: Get.height * 0.3,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 400,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: AppColors.cardBg,
+                                const Text(
+                                  'My Task',
+                                  style: TextStyle(
+                                    color: AppColors.primaryText,
+                                    fontSize: 30,
                                   ),
-                                  padding: const EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                //My Task
+                                SizedBox(
+                                  height: 200,
+                                  child: ListView(
+                                    clipBehavior: Clip.antiAlias,
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
                                     children: [
-                                      Row(
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            child: const CircleAvatar(
-                                              backgroundColor: Colors.amber,
-                                              radius: 20,
-                                              foregroundImage: NetworkImage(
-                                                  'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                      Container(
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: AppColors.cardBg,
+                                        ),
+                                        margin: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                  height: 25,
+                                                  width: 80,
+                                                  color: AppColors.primaryBg,
+                                                  child: const Center(
+                                                      child: Text(
+                                                    '100%',
+                                                    style: TextStyle(
+                                                      color:
+                                                          AppColors.primaryText,
+                                                    ),
+                                                  )),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                            child: const CircleAvatar(
-                                              backgroundColor: Colors.amber,
-                                              radius: 20,
-                                              foregroundImage: NetworkImage(
-                                                  'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                            const Spacer(),
+                                            Container(
+                                              height: 25,
+                                              width: 80,
+                                              color: AppColors.primaryBg,
+                                              child: const Center(
+                                                  child: Text(
+                                                '10/10 Task',
+                                                style: TextStyle(
+                                                  color: AppColors.primaryText,
+                                                ),
+                                              )),
                                             ),
-                                          ),
-                                          const Spacer(),
-                                          Container(
-                                            height: 25,
-                                            width: 80,
-                                            color: AppColors.primaryBg,
-                                            child: const Center(
-                                                child: Text(
-                                              '100 %',
+                                            const Text(
+                                              'Pemrograman Internet Lanjut',
                                               style: TextStyle(
                                                 color: AppColors.primaryText,
+                                                fontSize: 20,
                                               ),
-                                            )),
-                                          )
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      Container(
-                                        height: 25,
-                                        width: 80,
-                                        color: AppColors.primaryBg,
-                                        child: const Center(
-                                          child: Text(
-                                            '10 / 10 Task',
-                                            style: TextStyle(
-                                              color: AppColors.primaryText,
-                                              fontSize: 20,
                                             ),
-                                          ),
+                                            const Text(
+                                              'Deadline 2 Hari Lagi',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      const Text(
-                                        'Pemrograman Mobile',
-                                        style: TextStyle(
-                                          color: AppColors.primaryText,
-                                          fontSize: 20,
+                                      Container(
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: AppColors.cardBg,
+                                        ),
+                                        margin: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                  height: 25,
+                                                  width: 80,
+                                                  color: AppColors.primaryBg,
+                                                  child: const Center(
+                                                      child: Text(
+                                                    '100%',
+                                                    style: TextStyle(
+                                                      color:
+                                                          AppColors.primaryText,
+                                                    ),
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                              height: 25,
+                                              width: 80,
+                                              color: AppColors.primaryBg,
+                                              child: const Center(
+                                                  child: Text(
+                                                '10/10 Task',
+                                                style: TextStyle(
+                                                  color: AppColors.primaryText,
+                                                ),
+                                              )),
+                                            ),
+                                            const Text(
+                                              'Pemrograman Internet Lanjut',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            const Text(
+                                              'Deadline 2 Hari Lagi',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      const Text(
-                                        'Deadline 2 hari lagi',
-                                        style: TextStyle(
-                                          color: AppColors.primaryText,
-                                          fontSize: 15,
+                                      Container(
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: AppColors.cardBg,
+                                        ),
+                                        margin: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                  height: 25,
+                                                  width: 80,
+                                                  color: AppColors.primaryBg,
+                                                  child: const Center(
+                                                      child: Text(
+                                                    '100%',
+                                                    style: TextStyle(
+                                                      color:
+                                                          AppColors.primaryText,
+                                                    ),
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                              height: 25,
+                                              width: 80,
+                                              color: AppColors.primaryBg,
+                                              child: const Center(
+                                                  child: Text(
+                                                '10/10 Task',
+                                                style: TextStyle(
+                                                  color: AppColors.primaryText,
+                                                ),
+                                              )),
+                                            ),
+                                            const Text(
+                                              'Pemrograman Internet Lanjut',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            const Text(
+                                              'Deadline 2 Hari Lagi',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          color: AppColors.cardBg,
+                                        ),
+                                        margin: const EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                  child: const CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.amber,
+                                                    radius: 20,
+                                                    foregroundImage: NetworkImage(
+                                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                Container(
+                                                  height: 25,
+                                                  width: 80,
+                                                  color: AppColors.primaryBg,
+                                                  child: const Center(
+                                                      child: Text(
+                                                    '100%',
+                                                    style: TextStyle(
+                                                      color:
+                                                          AppColors.primaryText,
+                                                    ),
+                                                  )),
+                                                ),
+                                              ],
+                                            ),
+                                            const Spacer(),
+                                            Container(
+                                              height: 25,
+                                              width: 80,
+                                              color: AppColors.primaryBg,
+                                              child: const Center(
+                                                  child: Text(
+                                                '10/10 Task',
+                                                style: TextStyle(
+                                                  color: AppColors.primaryText,
+                                                ),
+                                              )),
+                                            ),
+                                            const Text(
+                                              'Pemrograman Internet Lanjut',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                            const Text(
+                                              'Deadline 2 Hari Lagi',
+                                              style: TextStyle(
+                                                color: AppColors.primaryText,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
@@ -196,7 +506,17 @@ class HomeView extends GetView<HomeController> {
                                 ),
                               ],
                             ),
-                          )
+                          ),
+                          !context.isPhone
+                              ? Expanded(
+                                  child: Row(
+                                    children: const [
+                                      UpcomingTask(),
+                                      MyFriends(),
+                                    ],
+                                  ),
+                                )
+                              : const UpcomingTask(),
                         ],
                       ),
                     ),
@@ -205,6 +525,8 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
