@@ -51,7 +51,6 @@ class MyFriends extends StatelessWidget {
                 height: 20,
               ),
               SizedBox(
-                height: 400,
                 child: GridView.builder(
                     shrinkWrap: true,
                     itemCount: 8,
