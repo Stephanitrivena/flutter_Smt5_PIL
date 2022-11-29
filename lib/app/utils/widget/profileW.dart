@@ -13,7 +13,8 @@ class ProfileWidget extends StatelessWidget {
       child: !context.isPhone
           ? Row(
               children: [
-                Expanded(
+                const Expanded(
+                  flex: 1,
                   child: ClipRRect(
                     child: CircleAvatar(
                       backgroundColor: Colors.amber,
@@ -30,19 +31,19 @@ class ProfileWidget extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: const [
                       Text(
                         'Park Kyungsoo',
                         style: TextStyle(
                           color: AppColors.primaryText,
-                          fontSize: 30,
+                          fontSize: 40,
                         ),
                       ),
                       Text(
                         'kyungsoo@gmail.com',
                         style: TextStyle(
                           color: AppColors.primaryText,
-                          fontSize: 15,
+                          fontSize: 16,
                         ),
                       ),
                     ],
@@ -54,7 +55,7 @@ class ProfileWidget extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: 40,
                   ),
                   ClipRRect(
                     child: CircleAvatar(
@@ -77,14 +78,14 @@ class ProfileWidget extends StatelessWidget {
                           'Park Kyungsoo',
                           style: TextStyle(
                             color: AppColors.primaryText,
-                            fontSize: 30,
+                            fontSize: 40,
                           ),
                         ),
                         Text(
-                          'kyungsoo@gmail.com',
+                          '              kyungsoo@gmail.com',
                           style: TextStyle(
                             color: AppColors.primaryText,
-                            fontSize: 15,
+                            fontSize: 16,
                           ),
                         ),
                       ],

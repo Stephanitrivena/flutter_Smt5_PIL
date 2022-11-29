@@ -87,7 +87,7 @@ class ProfileView extends GetView<ProfileController> {
                                   'Sign Out',
                                   style: TextStyle(
                                       color: AppColors.primaryText,
-                                      fontSize: 15),
+                                      fontSize: 16),
                                 ),
                                 SizedBox(
                                   width: 5,
