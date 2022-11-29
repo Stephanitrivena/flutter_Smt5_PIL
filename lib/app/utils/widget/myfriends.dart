@@ -6,7 +6,6 @@ import 'package:get/utils.dart';
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter_pertama/app/routes/app_pages.dart';
 import 'package:flutter_pertama/app/utils/style/AppColors.dart';
-
 import '../style/AppColors.dart';
 
 class MyFriends extends StatelessWidget {
@@ -73,7 +72,7 @@ class MyFriends extends StatelessWidget {
                             ),
                           ),
                           const Text(
-                            'Alicia Jasmine',
+                            'Park Kyungsoo',
                             style: TextStyle(color: AppColors.primaryText),
                           ),
                         ],
