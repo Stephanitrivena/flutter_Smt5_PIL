@@ -14,7 +14,6 @@ abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
   static const PROFILE = '/profile';
-  static const ABOUT = '/about';
   static const LOGIN = '/login';
   static const TASK = '/task';
   static const FRIENDS = '/friends';
