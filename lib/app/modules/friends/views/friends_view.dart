@@ -76,7 +76,7 @@ class FriendsView extends GetView<FriendsController> {
                               backgroundColor: Colors.amber,
                               radius: 25,
                               foregroundImage: NetworkImage(
-                                  'https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/27/08/jennifer-lawrence.jpg?quality=75&width982&height=726&auto=webp'),
+                                  'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
                             ),
                           ),
                         ],
