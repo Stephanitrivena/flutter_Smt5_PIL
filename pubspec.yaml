@@ -10,6 +10,8 @@ dependencies:
   get: 4.6.5
   onboarding: 3.1.0
   antdesign_icons: 0.0.3
+  firebase_core: 2.3.0
+  firebase_auth: 4.1.4
   flutter: 
     sdk: flutter
 
