@@ -76,7 +76,7 @@ class AuthController extends GetxController {
         }
       });
     } else {
-      users.doc(googleUser.email).set({
+      users.doc(googleUser.email).update({
         'lastLoginAt':
             _userCredential!.user!.metadata.lastSignInTime.toString(),
       });
@@ -107,6 +107,7 @@ class AuthController extends GetxController {
       }
 
       if (kataCari.isNotEmpty) {
+        hasilPencarian.value = [];
         kataCari.forEach((element) {
           print(element);
           hasilPencarian.add(element);
