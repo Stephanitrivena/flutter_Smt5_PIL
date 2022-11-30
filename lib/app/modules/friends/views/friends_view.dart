@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_pertama/app/data/controller/auth_controller.dart';
 import 'package:get/get.dart';
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter_pertama/app/routes/app_pages.dart';
@@ -14,6 +15,7 @@ import '../controllers/friends_controller.dart';
 
 class FriendsView extends GetView<FriendsController> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  final authCon = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +93,9 @@ class FriendsView extends GetView<FriendsController> {
                             ),
                             context.isPhone
                                 ? TextField(
+                                    onChanged: (value) =>
+                                        authCon.searchFriends(value),
+                                    controller: authCon.searchFriendsController,
                                     decoration: InputDecoration(
                                       filled: true,
                                       fillColor: Colors.white,
@@ -132,72 +137,102 @@ class FriendsView extends GetView<FriendsController> {
                           ? BorderRadius.circular(50)
                           : BorderRadius.circular(20),
                     ),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'People You May Know',
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: AppColors.primaryText,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 200,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              clipBehavior: Clip.antiAlias,
-                              itemCount: 10,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(50),
-                                        child: const Image(
-                                          image: NetworkImage(
-                                            'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg',
-                                          ),
-                                        ),
-                                      ),
-                                      const Positioned(
-                                        bottom: 10,
-                                        left: 50,
-                                        child: Text(
-                                          'Park Kyungsoo',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        bottom: 0,
-                                        right: 0,
-                                        child: SizedBox(
-                                          height: 36,
-                                          width: 36,
-                                          child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                padding: EdgeInsets.zero,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
+                    child: Obx(
+                      () => authCon.hasilPencarian.isEmpty
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                  const Text(
+                                    'People You May Know',
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      color: AppColors.primaryText,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 200,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      shrinkWrap: true,
+                                      clipBehavior: Clip.antiAlias,
+                                      itemCount: 10,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                child: const Image(
+                                                  image: NetworkImage(
+                                                    'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg',
+                                                  ),
                                                 ),
                                               ),
-                                              child: Icon(
-                                                Icons.add_circle_outline,
-                                              )),
-                                        ),
-                                      ),
-                                    ],
+                                              const Positioned(
+                                                bottom: 10,
+                                                left: 50,
+                                                child: Text(
+                                                  'Park Kyungsoo',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                bottom: 0,
+                                                right: 0,
+                                                child: SizedBox(
+                                                  height: 36,
+                                                  width: 36,
+                                                  child: ElevatedButton(
+                                                      onPressed: () {},
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                        ),
+                                                      ),
+                                                      child: Icon(
+                                                        Icons
+                                                            .add_circle_outline,
+                                                      )),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
-                                );
-                              },
+                                  MyFriends()
+                                ])
+                          : ListView.builder(
+                              padding: EdgeInsets.all(8),
+                              shrinkWrap: true,
+                              itemCount: authCon.hasilPencarian.length,
+                              itemBuilder: (context, index) => ListTile(
+                                leading: ClipRRect(
+                                  borderRadius: BorderRadius.circular(50),
+                                  child: Image(
+                                    image: NetworkImage(
+                                      authCon.hasilPencarian[index]['photo'],
+                                    ),
+                                  ),
+                                ),
+                                title:
+                                    Text(authCon.hasilPencarian[index]['name']),
+                                subtitle: Text(
+                                    authCon.hasilPencarian[index]['email']),
+                                trailing: Icon(AntIcons.fileAddFilled),
+                              ),
                             ),
-                          ),
-                          MyFriends()
-                        ]),
+                    ),
                   ),
                 )
               ]),
