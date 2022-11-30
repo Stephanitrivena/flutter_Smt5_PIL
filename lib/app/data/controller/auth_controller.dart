@@ -113,9 +113,9 @@ class AuthController extends GetxController {
         });
         kataCari.clear();
       }
-    }else{
-      kataCari.value = [],
-      hasilPencarian.value = [],
+    } else {
+      kataCari.value = [];
+      hasilPencarian.value = [];
     }
     kataCari.refresh();
     hasilPencarian.refresh();
