@@ -37,51 +37,83 @@ class FriendsView extends GetView<FriendsController> {
                     ? const header()
                     : Container(
                         padding: const EdgeInsets.all(20),
-                        child: Row(
+                        child: Column(
                           children: [
-                            IconButton(
-                              onPressed: () {
-                                _drawerKey.currentState!.openDrawer();
-                              },
-                              icon: const Icon(Icons.menu,
-                                  color: AppColors.primaryText),
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            Column(
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
                               children: [
-                                const Text(
-                                  'Task Management',
-                                  style: TextStyle(
-                                      fontSize: 20,
+                                IconButton(
+                                  onPressed: () {
+                                    _drawerKey.currentState!.openDrawer();
+                                  },
+                                  icon: const Icon(Icons.menu,
                                       color: AppColors.primaryText),
                                 ),
-                                const Text(
-                                  'Manage task made easy',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: AppColors.primaryText),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                Column(
+                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Task Management',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: AppColors.primaryText),
+                                    ),
+                                    const Text(
+                                      'Manage task made easy',
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          color: AppColors.primaryText),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                const Icon(AntIcons.notificationFilled,
+                                    color: AppColors.primaryText, size: 30),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: const CircleAvatar(
+                                    backgroundColor: Colors.amber,
+                                    radius: 25,
+                                    foregroundImage: NetworkImage(
+                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                  ),
                                 ),
                               ],
                             ),
-                            const Spacer(),
-                            const Icon(AntIcons.notificationFilled,
-                                color: AppColors.primaryText, size: 30),
                             const SizedBox(
-                              width: 15,
+                              height: 10,
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: const CircleAvatar(
-                                backgroundColor: Colors.amber,
-                                radius: 25,
-                                foregroundImage: NetworkImage(
-                                    'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
-                              ),
-                            ),
+                            context.isPhone
+                                ? TextField(
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      contentPadding:
+                                          EdgeInsets.only(left: 40, right: 10),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide:
+                                            BorderSide(color: Colors.white),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                        borderSide:
+                                            BorderSide(color: Colors.blue),
+                                      ),
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.black,
+                                      ),
+                                      hintText: 'Search',
+                                    ),
+                                  )
+                                : const SizedBox(),
                           ],
                         ),
                       ),
