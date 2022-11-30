@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_pertama/app/data/controller/auth_controller.dart';
 
 import 'package:get/get.dart';
 import 'package:antdesign_icons/antdesign_icons.dart';
@@ -14,127 +15,133 @@ import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  final authC = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _drawerKey,
-      drawer: const Sidebar(),
+      drawer: const SizedBox(width: 150, child: Sidebar()),
       backgroundColor: AppColors.primaryBg,
-      body: Row(
-        children: [
-          !context.isPhone
-              ? const Expanded(
-                  flex: 2,
-                  child: Sidebar(),
-                )
-              : const SizedBox(),
-          Expanded(
-            flex: 15,
-            child: Column(children: [
-              !context.isPhone
-                  ? const header()
-                  : Container(
-                      padding: const EdgeInsets.all(20),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              _drawerKey.currentState!.openDrawer();
-                            },
-                            icon: const Icon(Icons.menu,
-                                color: AppColors.primaryText),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Column(
-                            // mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Task Management',
-                                style: TextStyle(
-                                    fontSize: 20, color: AppColors.primaryText),
-                              ),
-                              const Text(
-                                'Manage task made easy with friends',
-                                style: TextStyle(
-                                    fontSize: 14, color: AppColors.primaryText),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            onTap: () {
-                              Get.defaultDialog(
-                                title: 'Sign Out',
-                                content: const Text(
-                                    'Are you sure want to Sign Out?'),
-                                cancel: ElevatedButton(
-                                  onPressed: () => Get.back(),
-                                  child: const Text('Cancel'),
-                                ),
-                                confirm: ElevatedButton(
-                                  onPressed: () => Get.toNamed(Routes.LOGIN),
-                                  child: const Text('Sign Out'),
-                                ),
-                              );
-                            },
-                            child: Row(
-                              children: const [
-                                Text(
-                                  'Sign Out',
+      body: SafeArea(
+        child: Row(
+          children: [
+            !context.isPhone
+                ? const Expanded(
+                    flex: 2,
+                    child: Sidebar(),
+                  )
+                : const SizedBox(),
+            Expanded(
+              flex: 15,
+              child: Column(children: [
+                !context.isPhone
+                    ? const header()
+                    : Container(
+                        padding: const EdgeInsets.all(20),
+                        child: Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                _drawerKey.currentState!.openDrawer();
+                              },
+                              icon: const Icon(Icons.menu,
+                                  color: AppColors.primaryText),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Task Management',
                                   style: TextStyle(
-                                      color: AppColors.primaryText,
-                                      fontSize: 16),
+                                      fontSize: 20,
+                                      color: AppColors.primaryText),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  AntIcons.logoutOutlined,
-                                  color: AppColors.primaryText,
-                                  size: 30,
+                                const Text(
+                                  'Manage task made easy',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: AppColors.primaryText),
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-              // content / isi page / screen
-              Expanded(
-                child: Container(
-                  padding: !context.isPhone
-                      ? EdgeInsets.all(50)
-                      : EdgeInsets.all(20),
-                  margin:
-                      !context.isPhone ? EdgeInsets.all(10) : EdgeInsets.all(0),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: !context.isPhone
-                          ? BorderRadius.circular(50)
-                          : BorderRadius.circular(20)),
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        ProfileWidget(),
-                        Text(
-                          'My Task',
-                          style: TextStyle(
-                            color: AppColors.primaryText,
-                            fontSize: 30,
-                          ),
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () {
+                                Get.defaultDialog(
+                                  title: 'Sign Out',
+                                  content: const Text(
+                                      'Are you sure want to Sign Out?'),
+                                  cancel: ElevatedButton(
+                                    onPressed: () => Get.back(),
+                                    child: const Text('Cancel'),
+                                  ),
+                                  confirm: ElevatedButton(
+                                    onPressed: () => authC.logout(),
+                                    child: const Text('Sign Out'),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: const [
+                                  Text(
+                                    'Sign Out',
+                                    style: TextStyle(
+                                        color: AppColors.primaryText,
+                                        fontSize: 16),
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Icon(
+                                    AntIcons.logoutOutlined,
+                                    color: AppColors.primaryText,
+                                    size: 30,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 169, child: myTask()),
-                      ]),
-                ),
-              )
-            ]),
-          )
-        ],
+                      ),
+                // content / isi page / screen
+                Expanded(
+                  child: Container(
+                    padding: !context.isPhone
+                        ? EdgeInsets.all(50)
+                        : EdgeInsets.all(20),
+                    margin: !context.isPhone
+                        ? EdgeInsets.all(10)
+                        : EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: !context.isPhone
+                            ? BorderRadius.circular(50)
+                            : BorderRadius.circular(20)),
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          ProfileWidget(),
+                          Text(
+                            'My Task',
+                            style: TextStyle(
+                              color: AppColors.primaryText,
+                              fontSize: 30,
+                            ),
+                          ),
+                          SizedBox(height: 169, child: myTask()),
+                        ]),
+                  ),
+                )
+              ]),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -55,7 +55,7 @@ class ProfileWidget extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 40,
+                    height: 10,
                   ),
                   ClipRRect(
                     child: CircleAvatar(
@@ -67,7 +67,7 @@ class ProfileWidget extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Center(
                     child: Column(

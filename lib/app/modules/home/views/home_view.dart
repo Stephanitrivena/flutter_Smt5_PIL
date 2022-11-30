@@ -18,7 +18,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _drawerKey,
-      drawer: const Sidebar(),
+      drawer: const SizedBox(width: 150, child: Sidebar()),
       backgroundColor: AppColors.primaryBg,
       body: SafeArea(
         child: Row(
@@ -60,9 +60,9 @@ class HomeView extends GetView<HomeController> {
                                         color: AppColors.primaryText),
                                   ),
                                   Text(
-                                    'Manage task made easy with friends',
+                                    'Manage task made easy',
                                     style: TextStyle(
-                                        fontSize: 15,
+                                        fontSize: 14,
                                         color: AppColors.primaryText),
                                   ),
                                 ],
