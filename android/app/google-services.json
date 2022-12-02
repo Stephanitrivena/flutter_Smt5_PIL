@@ -29,6 +29,13 @@
             {
               "client_id": "419188940723-lm8jrnlhplu7t6i575555odcvk0gptdd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "419188940723-1smrsm0qdvm8tboigrqn0irhgesejoq1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterPertama"
+              }
             }
           ]
         }
