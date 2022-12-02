@@ -7,7 +7,7 @@ import 'package:flutter_pertama/app/utils/widget/sidebar.dart';
 import 'package:get/get.dart';
 import 'package:flutter_pertama/app/utils/widget/Upcomingtask.dart';
 import '../controllers/home_controller.dart';
-import 'dart:js';
+import 'package:get/get.dart';
 
 import 'package:flutter_pertama/app/utils/widget/myfriends.dart';
 

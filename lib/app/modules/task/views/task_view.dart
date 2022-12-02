@@ -141,7 +141,7 @@ class TaskView extends GetView<TaskController> {
                                               backgroundColor: Colors.amber,
                                               radius: 20,
                                               foregroundImage: NetworkImage(
-                                                'https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/27/08/jennifer-lawrence.jpg?quality=75&width=982&height=726&auto=webp%27',
+                                                'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg',
                                               ),
                                             ),
                                           ),
@@ -152,7 +152,7 @@ class TaskView extends GetView<TaskController> {
                                               backgroundColor: Colors.amber,
                                               radius: 20,
                                               foregroundImage: NetworkImage(
-                                                'https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/09/27/08/jennifer-lawrence.jpg?quality=75&width=982&height=726&auto=webp%27',
+                                                'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg',
                                               ),
                                             ),
                                           ),
