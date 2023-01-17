@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_pertama/app/data/controller/auth_controller.dart';
+import 'package:flutter_pertama/app/utils/widget/peopleYouMayKnow.dart';
 import 'package:get/get.dart';
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter_pertama/app/routes/app_pages.dart';
@@ -149,67 +150,7 @@ class FriendsView extends GetView<FriendsController> {
                                       color: AppColors.primaryText,
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 200,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      shrinkWrap: true,
-                                      clipBehavior: Clip.antiAlias,
-                                      itemCount: 10,
-                                      itemBuilder: (context, index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Stack(
-                                            children: [
-                                              ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                child: const Image(
-                                                  image: NetworkImage(
-                                                    'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg',
-                                                  ),
-                                                ),
-                                              ),
-                                              const Positioned(
-                                                bottom: 10,
-                                                left: 50,
-                                                child: Text(
-                                                  'Park Kyungsoo',
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              ),
-                                              Positioned(
-                                                bottom: 0,
-                                                right: 0,
-                                                child: SizedBox(
-                                                  height: 36,
-                                                  width: 36,
-                                                  child: ElevatedButton(
-                                                      onPressed: () {},
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(50),
-                                                        ),
-                                                      ),
-                                                      child: Icon(
-                                                        Icons
-                                                            .add_circle_outline,
-                                                      )),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
+                                  PeopleYouMayKnow(),
                                   MyFriends()
                                 ])
                           : ListView.builder(
@@ -217,6 +158,8 @@ class FriendsView extends GetView<FriendsController> {
                               shrinkWrap: true,
                               itemCount: authCon.hasilPencarian.length,
                               itemBuilder: (context, index) => ListTile(
+                                onTap: () => authCon.addFriends(
+                                    authCon.hasilPencarian[index]['email']),
                                 leading: ClipRRect(
                                   borderRadius: BorderRadius.circular(50),
                                   child: Image(

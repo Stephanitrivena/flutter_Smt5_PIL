@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pertama/app/data/controller/auth_controller.dart';
 import 'package:flutter_pertama/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
@@ -9,9 +11,7 @@ import 'package:flutter_pertama/app/utils/style/AppColors.dart';
 import '../style/AppColors.dart';
 
 class MyFriends extends StatelessWidget {
-  const MyFriends({
-    Key? key,
-  }) : super(key: key);
+  final authCon = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +23,17 @@ class MyFriends extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'My Friends',
                     style: TextStyle(
                       color: AppColors.primaryText,
                       fontSize: 30,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GestureDetector(
                     onTap: () => Get.toNamed(Routes.FRIENDS),
-                    child: Text(
+                    child: const Text(
                       'More',
                       style: TextStyle(
                         color: AppColors.primaryText,
@@ -41,7 +41,7 @@ class MyFriends extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.chevron_right,
                     color: AppColors.primaryText,
                   )
@@ -50,32 +50,58 @@ class MyFriends extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                child: GridView.builder(
+              StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+                stream: authCon.streamFriends(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  var myFriends = (snapshot.data!.data()
+                      as Map<String, dynamic>)['emailFriends'] as List;
+
+                  return GridView.builder(
                     shrinkWrap: true,
-                    itemCount: 8,
+                    itemCount: myFriends.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: context.isPhone ? 2 : 3,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20),
                     itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: const Image(
-                              height: 90,
-                              image: NetworkImage(
-                                  'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
-                            ),
-                          ),
-                          const Text(
-                            'Park Kyungsoo',
-                            style: TextStyle(color: AppColors.primaryText),
-                          ),
-                        ],
-                      );
-                    }),
+                      return StreamBuilder<
+                              DocumentSnapshot<Map<String, dynamic>>>(
+                          stream: authCon.streamUsers(myFriends[index]),
+                          builder: (context, snapshot2) {
+                            if (snapshot2.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+
+                            var data = snapshot2.data!.data();
+
+                            return Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Image(
+                                    image: NetworkImage(data!['photo']),
+                                    height: Get.width * 0.35,
+                                    width: Get.width * 0.4,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Text(
+                                  data['name'],
+                                  style: const TextStyle(
+                                      color: AppColors.primaryText),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                  );
+                },
               ),
             ],
           ),
