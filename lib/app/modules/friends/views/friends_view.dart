@@ -80,11 +80,11 @@ class FriendsView extends GetView<FriendsController> {
                                 ),
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(30),
-                                  child: const CircleAvatar(
+                                  child: CircleAvatar(
                                     backgroundColor: Colors.amber,
                                     radius: 25,
                                     foregroundImage: NetworkImage(
-                                        'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                        authCon.auth.currentUser!.photoURL!),
                                   ),
                                 ),
                               ],

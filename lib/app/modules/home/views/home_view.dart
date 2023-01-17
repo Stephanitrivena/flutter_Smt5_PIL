@@ -1,8 +1,10 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pertama/app/data/controller/auth_controller.dart';
 import 'package:flutter_pertama/app/utils/style/AppColors.dart';
 import 'package:flutter_pertama/app/utils/widget/header.dart';
 import 'package:flutter_pertama/app/utils/widget/myTask.dart';
+import 'package:flutter_pertama/app/utils/widget/peopleYouMayKnow.dart';
 import 'package:flutter_pertama/app/utils/widget/sidebar.dart';
 import 'package:get/get.dart';
 import 'package:flutter_pertama/app/utils/widget/Upcomingtask.dart';
@@ -13,6 +15,7 @@ import 'package:flutter_pertama/app/utils/widget/myfriends.dart';
 
 class HomeView extends GetView<HomeController> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+  final authCon = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +78,11 @@ class HomeView extends GetView<HomeController> {
                               ),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: const CircleAvatar(
+                                child: CircleAvatar(
                                   backgroundColor: Colors.amber,
                                   radius: 25,
                                   foregroundImage: NetworkImage(
-                                      'https://www.dreamers.id/img_artikel/93d.o-military-photo.jpg'),
+                                      authCon.auth.currentUser!.photoURL!),
                                 ),
                               ),
                             ],
@@ -108,31 +111,31 @@ class HomeView extends GetView<HomeController> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'My Task',
+                                const Text(
+                                  'People You May Know',
                                   style: TextStyle(
                                     color: AppColors.primaryText,
                                     fontSize: 30,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+
                                 //My Task
-                                myTask(),
+                                PeopleYouMayKnow(),
                               ],
                             ),
                           ),
                           !context.isPhone
                               ? Expanded(
                                   child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      UpcomingTask(),
+                                      myTask(),
                                       MyFriends(),
                                     ],
                                   ),
                                 )
-                              : const UpcomingTask(),
+                              : myTask(),
                         ],
                       ),
                     ),

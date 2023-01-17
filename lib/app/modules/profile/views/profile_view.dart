@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_pertama/app/data/controller/auth_controller.dart';
+import 'package:flutter_pertama/app/utils/widget/peopleYouMayKnow.dart';
 
 import 'package:get/get.dart';
 import 'package:antdesign_icons/antdesign_icons.dart';
@@ -15,7 +16,7 @@ import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  final authC = Get.find<AuthController>();
+  final AuthConn = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +82,7 @@ class ProfileView extends GetView<ProfileController> {
                                     child: const Text('Cancel'),
                                   ),
                                   confirm: ElevatedButton(
-                                    onPressed: () => authC.logout(),
+                                    onPressed: () => AuthConn.logout(),
                                     child: const Text('Sign Out'),
                                   ),
                                 );
@@ -125,16 +126,16 @@ class ProfileView extends GetView<ProfileController> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           ProfileWidget(),
-                          Text(
-                            'My Task',
+                          const Text(
+                            'People You May Know',
                             style: TextStyle(
                               color: AppColors.primaryText,
                               fontSize: 30,
                             ),
                           ),
-                          SizedBox(height: 169, child: myTask()),
+                          SizedBox(height: 169, child: PeopleYouMayKnow()),
                         ]),
                   ),
                 )
